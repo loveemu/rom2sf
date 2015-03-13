@@ -171,53 +171,44 @@ bool NDS2SF::exe2sf(const std::string& nds2sf_path, uint8_t *exe, size_t exe_siz
 
 bool NDS2SF::exe2sf_file(const std::string& nds_path, const std::string& nds2sf_path)
 {
-	bool result = false;
-
-	FILE * rom_file = NULL;
-	uint8_t * exe = NULL;
-
 	off_t rom_size_off = path_getfilesize(nds_path.c_str());
 	if (rom_size_off == -1) {
-		goto finish;
+		return false;
 	}
 
 	if (rom_size_off > MAX_NDS_ROM_SIZE) {
-		goto finish;
+		return false;
 	}
 
 	uint32_t rom_size = (uint32_t)rom_size_off;
 
-	rom_file = fopen(nds_path.c_str(), "rb");
+	FILE * rom_file = fopen(nds_path.c_str(), "rb");
 	if (rom_file == NULL) {
-		goto finish;
+		return false;
 	}
 
-	exe = new uint8_t[NDS2SF_EXE_HEADER_SIZE + rom_size];
+	uint8_t * exe = new uint8_t[NDS2SF_EXE_HEADER_SIZE + rom_size];
 	if (exe == NULL) {
-		goto finish;
+		fclose(rom_file);
+		return false;
 	}
 
 	put_2sf_exe_header(exe, 0, rom_size);
 	if (fread(&exe[NDS2SF_EXE_HEADER_SIZE], 1, rom_size, rom_file) != rom_size) {
-		goto finish;
+		delete[] exe;
+		fclose(rom_file);
+		return false;
 	}
 
 	if (!exe2sf(nds2sf_path, exe, NDS2SF_EXE_HEADER_SIZE + rom_size)) {
-		goto finish;
-	}
-
-	result = true;
-
-finish:
-	if (exe != NULL) {
 		delete[] exe;
-	}
-
-	if (rom_file != NULL) {
 		fclose(rom_file);
+		return false;
 	}
 
-	return result;
+	delete[] exe;
+	fclose(rom_file);
+	return true;
 }
 
 bool NDS2SF::make_mini2sf(const std::string& nds2sf_path, uint32_t address, size_t size, uint32_t num, std::map<std::string, std::string>& tags)
