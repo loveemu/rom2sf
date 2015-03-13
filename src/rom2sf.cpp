@@ -1,5 +1,5 @@
 /*
-** Simple utility to convert a GBA Rom to a GSF.
+** Simple utility to convert a NDS Rom to a 2SF.
 ** Based on EXE2PSF code, written by Neill Corlett
 ** Released under the terms of the GNU General Public License
 **

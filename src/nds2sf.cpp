@@ -225,6 +225,6 @@ bool NDS2SF::make_mini2sf(const std::string& nds2sf_path, uint32_t address, size
 	put_2sf_exe_header(exe, address, (uint32_t)size);
 	mput4l(num, &exe[NDS2SF_EXE_HEADER_SIZE]);
 
-	// write minigsf file
+	// write mini2sf file
 	return exe2sf(nds2sf_path, exe, NDS2SF_EXE_HEADER_SIZE + size, tags);
 }
