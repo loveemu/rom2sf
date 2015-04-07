@@ -8,7 +8,7 @@
 */
 
 #define APP_NAME	"rom2sf"
-#define APP_VER		"[2015-03-13]"
+#define APP_VER		"[2015-04-07]"
 #define APP_DESC	"NDS ROM to 2SF Converter"
 #define APP_AUTHOR	"loveemu <http://github.com/loveemu/rom2sf>"
 
@@ -49,6 +49,7 @@ void printUsage(const char *cmd)
 {
 	const char *availableOptions[] = {
 		"--help", "Show this help",
+		"--psfby, --2sfby [name]", "Set creator name of 2SF",
 	};
 
 	printf("%s %s\n", APP_NAME, APP_VER);
@@ -78,6 +79,8 @@ int main(int argc, char **argv)
 	int argnum;
 	int argi;
 
+	char *psfby = NULL;
+
 	argi = 1;
 	while (argi < argc && argv[argi][0] == '-')
 	{
@@ -85,6 +88,16 @@ int main(int argc, char **argv)
 		{
 			printUsage(argv[0]);
 			return EXIT_SUCCESS;
+		}
+		else if (strcmp(argv[argi], "--psfby") == 0 || strcmp(argv[argi], "--2sfby") == 0)
+		{
+			if (argi + 1 >= argc) {
+				fprintf(stderr, "Error: Too few arguments for \"%s\"\n", argv[argi]);
+				return EXIT_FAILURE;
+			}
+
+			psfby = argv[argi];
+			argi++;
 		}
 		else
 		{
@@ -114,7 +127,12 @@ int main(int argc, char **argv)
 		path_stripext(nds2sf_path);
 		strcat(nds2sf_path, ".2sf");
 
-		if (NDS2SF::exe2sf_file(nds_path, nds2sf_path)) {
+		std::map<std::string, std::string> tags;
+		if (psfby != NULL && strcmp(psfby, "") != 0) {
+			tags["2sfby"] = psfby;
+		}
+
+		if (NDS2SF::exe2sf_file(nds_path, nds2sf_path, tags)) {
 			printf("Converted %s to %s\n", nds_path, nds2sf_path);
 		}
 		else {

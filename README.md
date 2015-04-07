@@ -16,5 +16,8 @@ Syntax: `rom2sf <NDS Files>`
 
 ### Options ###
 
---help
+`--help`
   : Show help
+
+`--psfby`, `--2sfby` [name]
+  : Set creator name of 2SF

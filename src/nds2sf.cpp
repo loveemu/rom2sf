@@ -40,12 +40,6 @@ void NDS2SF::put_2sf_exe_header(uint8_t *exe, uint32_t load_offset, uint32_t rom
 	mput4l(rom_size, &exe[4]);
 }
 
-bool NDS2SF::exe2sf(const std::string& nds2sf_path, uint8_t *exe, size_t exe_size)
-{
-	std::map<std::string, std::string> tags;
-	return exe2sf(nds2sf_path, exe, exe_size, tags);
-}
-
 #define CHUNK 16384
 bool NDS2SF::exe2sf(const std::string& nds2sf_path, uint8_t *exe, size_t exe_size, std::map<std::string, std::string>& tags)
 {
@@ -169,7 +163,7 @@ bool NDS2SF::exe2sf(const std::string& nds2sf_path, uint8_t *exe, size_t exe_siz
 	return true;
 }
 
-bool NDS2SF::exe2sf_file(const std::string& nds_path, const std::string& nds2sf_path)
+bool NDS2SF::exe2sf_file(const std::string& nds_path, const std::string& nds2sf_path, std::map<std::string, std::string>& tags)
 {
 	off_t rom_size_off = path_getfilesize(nds_path.c_str());
 	if (rom_size_off == -1) {
@@ -200,7 +194,7 @@ bool NDS2SF::exe2sf_file(const std::string& nds_path, const std::string& nds2sf_
 		return false;
 	}
 
-	if (!exe2sf(nds2sf_path, exe, NDS2SF_EXE_HEADER_SIZE + rom_size)) {
+	if (!exe2sf(nds2sf_path, exe, NDS2SF_EXE_HEADER_SIZE + rom_size, tags)) {
 		delete[] exe;
 		fclose(rom_file);
 		return false;
