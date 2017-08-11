@@ -30,9 +30,10 @@ public:
 	}
 
 	static void put_2sf_exe_header(uint8_t *exe, uint32_t load_offset, uint32_t rom_size);
+	static bool exe2sf(const std::string& nds2sf_path, uint8_t *rom, size_t rom_size);
 	static bool exe2sf(const std::string& nds2sf_path, uint8_t *rom, size_t rom_size, std::map<std::string, std::string>& tags);
-	static bool exe2sf_file(const std::string& nds_path, const std::string& nds2sf_path, std::map<std::string, std::string>& tags);
-	static bool make_mini2sf(const std::string& nds2sf_path, uint32_t address, size_t size, uint32_t num, std::map<std::string, std::string>& tags);
+	static bool exe2sf_file(const std::string& nds_path, const std::string& nds2sf_path, uint32_t offset, std::map<std::string, std::string>& tags);
+	static bool make_mini2sf(const std::string& nds2sf_path, uint32_t offset, size_t size, uint32_t num, std::map<std::string, std::string>& tags);
 };
 
 #endif
