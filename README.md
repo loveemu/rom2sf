@@ -19,5 +19,14 @@ Syntax: `rom2sf <NDS Files>`
 `--help`
   : Show help
 
+`-o [output.2sf]`
+  : Specify output filename
+
+`--load [offset]`
+  : Load offset of mini2sf executable
+
+`--lib [libname.2sflib]`
+  : Specify 2sflib library name
+
 `--psfby`, `--2sfby` [name]
   : Set creator name of 2SF
