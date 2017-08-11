@@ -167,6 +167,10 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Run \"%s --help\" for help.\n", argv[0]);
 		return EXIT_FAILURE;
 	}
+	if (argnum > 1 && strcmp(nds2sf_path, "") != 0) {
+		fprintf(stderr, "Error: Unable to specify output filename for multiple inputs\n");
+		return EXIT_FAILURE;
+	}
 
 	int num_error = 0;
 	for (; argi < argc; argi++)
