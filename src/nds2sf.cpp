@@ -2,10 +2,6 @@
 ** NDS 2SF utility class.
 */
 
-#ifdef _WIN32
-#define ZLIB_WINAPI
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

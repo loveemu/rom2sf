@@ -12,10 +12,6 @@
 #define APP_DESC	"NDS ROM to 2SF Converter"
 #define APP_AUTHOR	"loveemu <http://github.com/loveemu/rom2sf>"
 
-#ifdef _WIN32
-#define ZLIB_WINAPI
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
