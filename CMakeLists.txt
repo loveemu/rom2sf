@@ -50,7 +50,14 @@ set(SRCS
     src/nds2sf.cpp
 )
 
-add_executable(rom2sf ${SRCS})
+set(HDRS
+    src/cbyteio.h
+    src/cpath.h
+    src/nds2sf.h
+    src/rom2sf.h
+)
+
+add_executable(rom2sf ${SRCS} ${HDRS})
 
 if(ZLIB_FOUND)
     include_directories(${ZLIB_INCLUDE_DIRS})
