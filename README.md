@@ -1,6 +1,6 @@
 ROM2SF: NDS ROM to 2SF Converter
 ================================
-[![Travis Build Status](https://travis-ci.org/loveemu/rom2sf.svg?branch=master)](https://travis-ci.org/loveemu/rom2sf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2rt4mekcr74316lx/branch/master?svg=true)](https://ci.appveyor.com/project/loveemu/rom2sf/branch/master)
+[![Travis Build Status](https://travis-ci.com/loveemu/rom2sf.svg?branch=master)](https://travis-ci.com/loveemu/rom2sf) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/2rt4mekcr74316lx/branch/master?svg=true)](https://ci.appveyor.com/project/loveemu/rom2sf/branch/master)
 
 Program to turn a rom into a 2sf file. This is used mostly with manual rips.
 <https://github.com/loveemu/rom2sf>
